@@ -35,7 +35,9 @@ def deobfuscate(request, key, juice=None):
     environ['QUERY_STRING'] = query
 
     # init a new request
+    session = request.session
     patched_request = request.__class__(environ)
+    patched_request.session = session
 
     response = view(patched_request, *args, **kwargs)
 
