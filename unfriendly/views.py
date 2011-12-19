@@ -38,6 +38,8 @@ def deobfuscate(request, key, juice=None):
     session = request.session
     patched_request = request.__class__(environ)
     patched_request.session = session
+    # mark this request as obfuscated
+    patched_request.META['obfuscated'] = True
 
     response = view(patched_request, *args, **kwargs)
 
